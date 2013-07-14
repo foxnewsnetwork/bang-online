@@ -22,15 +22,19 @@ module.exports = function (grunt) {
     yeoman: yeomanConfig,
     watch: {
       coffee: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
+        files: ['<%= yeoman.app %>/scripts/{,*/}{,*/}{,*/}*.coffee'],
         tasks: ['coffee:dist']
       },
+      jade: {
+        files: ['<%= yeoman.app %>/views/{,*/}{,*/}{,*/}*.jade'],
+        tasks: ['jade:dist']
+      },
       coffeeTest: {
-        files: ['test/spec/{,*/}*.coffee'],
+        files: ['test/spec/{,*/}{,*/}{,*/}*.coffee'],
         tasks: ['coffee:test']
       },
       compass: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        files: ['<%= yeoman.app %>/styles/{,*/}{,*/}{,*/}*.{scss,sass}'],
         tasks: ['compass']
       },
       livereload: {
@@ -124,6 +128,36 @@ module.exports = function (grunt) {
         }]
       }
     },
+	  jade: {
+		  dist: {
+        options: {
+          data: {
+            debug: false
+          }
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/views',
+          src: '{,*/}{,*/}{,*/}*.jade',
+          dest: '.tmp/views',
+          ext: '.html'
+        }]
+      },
+      debug: {
+        options: {
+          data: {
+            debug: true
+          }
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/views',
+          src: '{,*/}{,*/}{,*/}*.jade',
+          dest: '.tmp/views',
+          ext: '.html'
+        }]
+      }
+	  },
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
