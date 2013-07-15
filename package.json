@@ -1,7 +1,9 @@
 {
   "name": "bang-online",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "jade": ">=0.33.0"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.4.0",
@@ -27,7 +29,6 @@
     "grunt-ngmin": "~0.0.2"
   },
   "engines": {
-    "node": ">=0.8.0",
-    "jade": ">=0.33.0"
+    "node": ">=0.8.0"
   }
 }
