@@ -1,10 +1,6 @@
-define 'main/controller', [], ->
+define 'main/controller', ['card/model'], (Card) ->
   class Controller
     constructor: (app) ->
       app.controller 'MainCtrl#index', ($scope) ->
-        $scope.awesomeThings = [
-          'HTML5 Boilerplate',
-          'AngularJS',
-          'Karma'
-        ]
+        $scope.cards = [new Card(), new Card()]
     

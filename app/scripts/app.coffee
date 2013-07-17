@@ -8,7 +8,11 @@ require.config
     "config/routes": "scripts/config/routes",
     "config/bootstrap": "scripts/config/bootstrap",
     "main": "scripts/main",
-    "main/controller": "scripts/main/controller"
+    "main/controller": "scripts/main/controller",
+    "card": "scripts/card",
+    "card/directive": "scripts/card/directive",
+    "card/controller": "scripts/card/controller",
+    "card/model": "scripts/card/model"
   shim:
     "angular-resource": 
       deps: ["angular"]
