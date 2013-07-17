@@ -1,10 +1,21 @@
-'use strict'
+require.config
+  paths:
+    "faker": "components/Faker/Faker",
+    "angular": "components/angular/angular",
+    "angular-resource": "components/angular-resource/angular-resource",
+    "angular-cookies": "components/angular-cookies/angular-cookies",
+    "angular-sanitize": "components/angular-sanitize/angular-sanitize",
+    "config/routes": "scripts/config/routes",
+    "config/bootstrap": "scripts/config/bootstrap",
+    "main": "scripts/main",
+    "main/controller": "scripts/main/controller"
+  shim:
+    "angular-resource": 
+      deps: ["angular"]
+    "angular-cookies": 
+      deps: ["angular"]
+    "angular-sanitize": 
+      deps: ["angular"]
 
-angular.module('bangOnlineApp', [])
-  .config ($routeProvider) ->
-    $routeProvider
-      .when '/',
-        templateUrl: 'views/main.html'
-        controller: 'MainCtrl'
-      .otherwise
-        redirectTo: '/'
+require ['config/bootstrap', 'main'], (Bootstrap, Main) ->
+  Main.public_static_void Bootstrap.doit().app

@@ -30,16 +30,17 @@ module.exports = function (grunt) {
         tasks: ['jade:dist']
       },
       coffeeTest: {
-        files: ['test/spec/{,*/}{,*/}{,*/}*.coffee'],
+        files: ['test/spec/{,*/}*.coffee'],
         tasks: ['coffee:test']
       },
       compass: {
-        files: ['<%= yeoman.app %>/styles/{,*/}{,*/}{,*/}*.{scss,sass}'],
+        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass']
       },
       livereload: {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
+          '<%= yeoman.app %>/{,*/}*.jade',
           '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
@@ -108,28 +109,8 @@ module.exports = function (grunt) {
         singleRun: true
       }
     },
-    coffee: {
+    jade: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/scripts',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/scripts',
-          ext: '.js'
-        }]
-      },
-      test: {
-        files: [{
-          expand: true,
-          cwd: 'test/spec',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
-          ext: '.js'
-        }]
-      }
-    },
-	  jade: {
-		  dist: {
         options: {
           data: {
             debug: false
@@ -157,7 +138,27 @@ module.exports = function (grunt) {
           ext: '.html'
         }]
       }
-	  },
+    },
+    coffee: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/scripts',
+          src: '{,*/}{,*/}{,*/}*.coffee',
+          dest: '.tmp/scripts',
+          ext: '.js'
+        }]
+      },
+      test: {
+        files: [{
+          expand: true,
+          cwd: 'test/spec',
+          src: '{,*/}*.coffee',
+          dest: '.tmp/spec',
+          ext: '.js'
+        }]
+      }
+    },
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
@@ -299,6 +300,7 @@ module.exports = function (grunt) {
   grunt.registerTask('server', [
     'clean:server',
     'coffee:dist',
+    'jade:dist',
     'compass:server',
     'livereload-start',
     'connect:livereload',
@@ -309,6 +311,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:server',
     'coffee',
+    'jade',
     'compass',
     'connect:test',
     'karma'
@@ -319,6 +322,7 @@ module.exports = function (grunt) {
     'jshint',
     'test',
     'coffee',
+    'jade',
     'compass:dist',
     'useminPrepare',
     'imagemin',
